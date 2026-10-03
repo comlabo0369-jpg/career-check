@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>会社の外で通用する キャリア資産診断</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Chart.js (レーダーチャート用) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Google Fonts: Inter & Noto Sans JP -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<!-- FontAwesome icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+brand: {
+navy: '#0f172a',
+navyLight: '#1e293b',
+teal: '#0f766e',
+tealHover: '#115e59',
+tealLight: '#f0fdfa',
+orange: '#ea580c',
+orangeHover: '#c2410c',
+slateBg: '#f8fafc',
+}
+},
+fontFamily: {
+sans: ['Noto Sans JP', 'Inter', 'sans-serif'],
+}
+}
+}
+}
+</script>
+<style>
+body {
+font-family: 'Noto Sans JP', 'Inter', sans-serif;
+background-color: #f1f5f9;
+}
+.fade-in {
+animation: fadeIn 0.35s ease-out forwards;
+}
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(6px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.option-btn {
+transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.option-btn:hover {
+transform: translateY(-1px);
+}
+@media print {
+header, footer, #btn-retest, #cta-banner {
+display: none !important;
+}
+main {
+max-width: 100% !important;
+padding: 0 !important;
+}
+#result-screen {
+box-shadow: none !important;
+border: none !important;
+}
+}
+</style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between selection:bg-teal-100 selection:text-teal-900">
+
+<!-- Header -->
+<header class="bg-white border-b border-slate-200 py-3.5 px-4 sm:px-6 shadow-xs sticky top-0 z-30">
+<div class="max-w-4xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-brand-teal text-white w-9 h-9 rounded-lg flex items-center justify-center shadow-xs">
+<i class="fa-solid fa-briefcase text-base"></i>
+</div>
+<div>
+<span class="text-[11px] text-brand-teal font-bold tracking-wider block">キャリア自律・社外適応力アセスメント</span>
+<h1 class="text-sm md:text-base font-bold text-slate-900 tracking-tight">会社の外で通用する「キャリア資産診断」</h1>
+</div>
+</div>
+<div class="text-right hidden sm:flex items-center gap-2 text-xs text-slate-500 font-medium bg-slate-50 px-3 py-1.5 rounded-full border border-slate-200/60">
+<i class="fa-regular fa-clock text-slate-400"></i>
+<span>所要時間：約3分 (全18問)</span>
+</div>
+</div>
+</header>
+
+<!-- Main Container -->
+<main class="flex-grow max-w-2xl w-full mx-auto px-4 py-6 md:py-10 flex items-center justify-center">
+
+<!-- ================= 1. START SCREEN ================= -->
+<section id="start-screen" class="bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100 p-6 md:p-10 w-full fade-in">
+<div class="text-center mb-8">
+<span class="inline-flex items-center gap-1.5 bg-teal-50 text-brand-teal text-xs font-bold px-3.5 py-1.5 rounded-full border border-teal-200/60 mb-3">
+<i class="fa-solid fa-compass text-[11px]"></i> 40代・50代からのキャリアシフト支援
+</span>
+<h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 leading-tight">
+会社の看板を外したとき、
+
+<span class="text-brand-teal">あなたは何の専門家ですか？</span>
+</h2>
+</div>
+
+<div class="bg-slate-50 rounded-xl p-6 mb-8 border border-slate-200/80 text-slate-600 space-y-3.5 text-sm md:text-base leading-relaxed">
+<p class="font-bold text-slate-800 text-center text-base">
+これまで積み上げてきた業務経験の中に、<br class="hidden sm:inline">
+会社の外でも求められる「6つのキャリア資産」が眠っています。
+</p>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-2 text-xs text-slate-600">
+<div class="bg-white p-2.5 rounded-lg border border-slate-200 text-center font-semibold">
+<i class="fa-solid fa-layer-group text-brand-teal mr-1"></i> 経験資産
+</div>
+<div class="bg-white p-2.5 rounded-lg border border-slate-200 text-center font-semibold">
+<i class="fa-solid fa-award text-brand-teal mr-1"></i> 専門性資産
+</div>
+<div class="bg-white p-2.5 rounded-lg border border-slate-200 text-center font-semibold">
+<i class="fa-solid fa-comment-dots text-brand-teal mr-1"></i> 言語化資産
+</div>
+<div class="bg-white p-2.5 rounded-lg border border-slate-200 text-center font-semibold">
+<i class="fa-solid fa-handshake text-brand-teal mr-1"></i> 信頼資産
+</div>
+<div class="bg-white p-2.5 rounded-lg border border-slate-200 text-center font-semibold">
+<i class="fa-solid fa-box-open text-brand-teal mr-1"></i> 商品化資産
+</div>
+<div class="bg-white p-2.5 rounded-lg border border-slate-200 text-center font-semibold">
+<i class="fa-solid fa-person-walking text-brand-teal mr-1"></i> 行動準備資産
+</div>
+</div>
+<p class="text-xs text-slate-500 text-center pt-2">
+直感に従って18の質問に答えるだけで、現在地と「最初の一歩」を可視化します。
+</p>
+</div>
+
+<div class="space-y-4">
+<button type="button" onclick="startDiagnostics()" class="w-full bg-brand-teal hover:bg-brand-tealHover text-white font-bold text-lg py-4 rounded-xl shadow-lg shadow-teal-900/10 hover:shadow-xl transition-all flex items-center justify-center gap-2 group cursor-pointer">
+<span>無料で診断を開始する</span>
+<i class="fa-solid fa-arrow-right text-sm transition-transform group-hover:translate-x-1"></i>
+</button>
+<div class="flex items-center justify-center gap-4 text-xs text-slate-400">
+<span><i class="fa-solid fa-lock text-[10px] mr-1"></i>個人情報の登録不要</span>
+<span>•</span>
+<span><i class="fa-solid fa-check-double text-[10px] mr-1"></i>その場で即時結果表示</span>
+</div>
+</div>
+</section>
+
+<!-- ================= 2. QUIZ SCREEN ================= -->
+<section id="quiz-screen" class="hidden bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100 p-6 md:p-8 w-full fade-in" aria-live="polite">
+<!-- Progress Area -->
+<div class="mb-6">
+<div class="flex justify-between items-center mb-2">
+<span id="progress-text" class="text-xs font-bold text-brand-teal tracking-wide">設問 1 / 18</span>
+<span id="category-badge" class="text-xs bg-slate-100 text-slate-600 font-semibold px-2.5 py-0.5 rounded-full border border-slate-200">
+経験資産
+</span>
+</div>
+<div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+<div id="progress-bar" class="bg-brand-teal h-full transition-all duration-300" style="width: 5.5%"></div>
+</div>
+</div>
+
+<!-- Question area -->
+<div class="my-6 min-h-[4.5rem]">
+<span id="question-number" class="text-brand-teal font-extrabold text-xs uppercase tracking-wider block mb-1">Question 01</span>
+<h3 id="question-text" class="text-lg md:text-xl font-bold text-slate-900 leading-snug">
+質問テキスト
+</h3>
+</div>
+
+<!-- Options -->
+<div id="options-container" class="space-y-2.5 mb-6">
+<button type="button" onclick="selectAnswer(5)" data-val="5" class="option-btn w-full text-left p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-white text-slate-700 font-medium hover:border-brand-teal hover:bg-teal-50/40 flex items-center justify-between group cursor-pointer">
+<span class="font-bold text-sm sm:text-base">とても当てはまる</span>
+<i class="fa-regular fa-circle text-slate-300 text-lg group-hover:text-brand-teal check-icon"></i>
+</button>
+<button type="button" onclick="selectAnswer(4)" data-val="4" class="option-btn w-full text-left p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-white text-slate-700 font-medium hover:border-brand-teal hover:bg-teal-50/40 flex items-center justify-between group cursor-pointer">
+<span class="font-bold text-sm sm:text-base">まあ当てはまる</span>
+<i class="fa-regular fa-circle text-slate-300 text-lg group-hover:text-brand-teal check-icon"></i>
+</button>
+<button type="button" onclick="selectAnswer(3)" data-val="3" class="option-btn w-full text-left p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-white text-slate-700 font-medium hover:border-brand-teal hover:bg-teal-50/40 flex items-center justify-between group cursor-pointer">
+<span class="font-bold text-sm sm:text-base">どちらともいえない</span>
+<i class="fa-regular fa-circle text-slate-300 text-lg group-hover:text-brand-teal check-icon"></i>
+</button>
+<button type="button" onclick="selectAnswer(2)" data-val="2" class="option-btn w-full text-left p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-white text-slate-700 font-medium hover:border-brand-teal hover:bg-teal-50/40 flex items-center justify-between group cursor-pointer">
+<span class="font-bold text-sm sm:text-base">あまり当てはまらない</span>
+<i class="fa-regular fa-circle text-slate-300 text-lg group-hover:text-brand-teal check-icon"></i>
+</button>
+<button type="button" onclick="selectAnswer(1)" data-val="1" class="option-btn w-full text-left p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-white text-slate-700 font-medium hover:border-brand-teal hover:bg-teal-50/40 flex items-center justify-between group cursor-pointer">
+<span class="font-bold text-sm sm:text-base">まったく当てはまらない</span>
+<i class="fa-regular fa-circle text-slate-300 text-lg group-hover:text-brand-teal check-icon"></i>
+</button>
+</div>
+
+<!-- Back navigation -->
+<div class="flex justify-between items-center border-t border-slate-100 pt-4">
+<button id="back-btn" type="button" onclick="goBack()" class="text-slate-400 hover:text-slate-700 text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-colors cursor-pointer py-1 px-2 rounded">
+<i class="fa-solid fa-arrow-left text-xs"></i> 前の質問へ戻る
+</button>
+<span class="text-[11px] text-slate-400">直感で素早くお答えください</span>
+</div>
+</section>
+
+<!-- ================= 3. ANALYSIS SCREEN ================= -->
+<section id="analysis-screen" class="hidden bg-white rounded-2xl shadow-xl border border-slate-100 p-8 md:p-12 w-full text-center fade-in">
+<div class="flex flex-col items-center justify-center space-y-6">
+<!-- Spinner -->
+<div class="w-16 h-16 border-4 border-slate-100 border-t-brand-teal rounded-full animate-spin"></div>
+
+<div class="space-y-1.5">
+<h3 class="text-lg font-bold text-slate-900">あなたのキャリア資産を多角分析しています</h3>
+<p class="text-xs text-slate-400">回答データから社外通用度と強み・課題を算出中…</p>
+</div>
+
+<!-- Step progress list -->
+<div class="w-full max-w-sm text-left bg-slate-50 p-4 rounded-xl border border-slate-200/80 space-y-2.5 text-xs sm:text-sm">
+<div id="step-1" class="text-slate-400 flex items-center gap-2.5">
+<i class="fa-solid fa-circle-notch animate-spin text-brand-teal"></i>
+<span>1. 蓄積された業務経験のスコアリング</span>
+</div>
+<div id="step-2" class="text-slate-300 flex items-center gap-2.5">
+<i class="fa-regular fa-circle"></i>
+<span>2. 社外で換金・価値化できる強みの特定</span>
+</div>
+<div id="step-3" class="text-slate-300 flex items-center gap-2.5">
+<i class="fa-regular fa-circle"></i>
+<span>3. 現在の社外キャリア移行ステージ判定</span>
+</div>
+<div id="step-4" class="text-slate-300 flex items-center gap-2.5">
+<i class="fa-regular fa-circle"></i>
+<span>4. 今週から着手すべきアクションプランの生成</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ================= 4. RESULT SCREEN ================= -->
+<section id="result-screen" class="hidden bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden w-full fade-in">
+
+<!-- Result Hero -->
+<div class="bg-brand-navy text-white text-center p-6 sm:p-8 border-b-4 border-brand-teal relative">
+<div class="inline-flex items-center gap-1.5 text-xs bg-brand-teal text-white font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+<i class="fa-solid fa-chart-pie text-[11px]"></i> 診断結果レポート
+</div>
+<h2 class="text-xl md:text-2xl font-bold">あなたの「社外キャリア資産」現在地</h2>
+<p class="text-xs text-slate-300 mt-1">会社の看板を外した個人としての市場適応力</p>
+</div>
+
+<div class="p-5 md:p-8 space-y-6 sm:space-y-8">
+
+<!-- 1. Total Score & Stage -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-stretch">
+<!-- Total Score Card -->
+<div class="bg-slate-50 rounded-xl p-5 border border-slate-200/80 flex flex-col justify-between text-center">
+<span class="text-[11px] font-bold text-slate-400 tracking-wider uppercase block">総合スコア</span>
+<h4 class="text-slate-700 font-bold text-sm mt-0.5">社外キャリア準備度</h4>
+<div class="my-3">
+<span id="total-score" class="text-5xl font-black text-brand-teal tracking-tight">0</span>
+<span class="text-slate-400 text-sm font-semibold"> / 100点</span>
+</div>
+<div>
+<div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
+<div id="score-bar" class="bg-brand-teal h-full transition-all duration-700" style="width: 0%"></div>
+</div>
+<span id="raw-score-sub" class="text-[11px] text-slate-400 block mt-1.5">回答スコア合計: 0 / 90点</span>
+</div>
+</div>
+
+<!-- Stage Card -->
+<div class="bg-slate-50 rounded-xl p-5 border border-slate-200/80 flex flex-col justify-between">
+<div>
+<span class="text-[11px] font-bold text-slate-400 tracking-wider uppercase block">判定ステージ</span>
+<h4 id="stage-title" class="text-base sm:text-lg font-extrabold text-slate-900 mt-1 flex items-center gap-1.5">
+判定中...
+</h4>
+</div>
+<p id="stage-desc" class="text-xs sm:text-sm text-slate-600 leading-relaxed mt-2.5 border-t border-slate-200/80 pt-3">
+読み込み中...
+</p>
+</div>
+</div>
+
+<!-- 2. Radar Chart -->
+<div class="bg-slate-50 rounded-xl p-5 border border-slate-200/80">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-slate-700 tracking-wide block">
+<i class="fa-solid fa-chart-radar text-brand-teal mr-1"></i> 6つの資産バランスチャート
+</span>
+<span class="text-[11px] text-slate-400">各資産100点換算</span>
+</div>
+<div class="w-full max-w-[320px] mx-auto aspect-square relative my-2">
+<canvas id="assetChart"></canvas>
+</div>
+<!-- Chart Legend Values -->
+<div id="chart-scores-list" class="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-4 text-xs text-slate-600 font-medium border-t border-slate-200/80 pt-3">
+<!-- JS injected -->
+</div>
+</div>
+
+<!-- 3. Dynamic Strengths & Areas to Grow -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+<!-- Strength -->
+<div class="bg-teal-50/50 rounded-xl p-5 border border-teal-100/90 flex flex-col">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-6 h-6 rounded-full bg-brand-teal text-white flex items-center justify-center text-xs">
+<i class="fa-solid fa-check"></i>
+</span>
+<span class="text-xs font-bold text-brand-teal tracking-wider uppercase">強み・中核資産</span>
+</div>
+<h5 id="strength-category-title" class="font-bold text-slate-900 text-sm mb-1.5"></h5>
+<p id="strength-text" class="text-xs sm:text-sm text-slate-700 leading-relaxed flex-grow">
+分析中...
+</p>
+</div>
+
+<!-- Grow area -->
+<div class="bg-orange-50/50 rounded-xl p-5 border border-orange-200/80 flex flex-col">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-6 h-6 rounded-full bg-brand-orange text-white flex items-center justify-center text-xs">
+<i class="fa-solid fa-seedling"></i>
+</span>
+<span class="text-xs font-bold text-brand-orange tracking-wider uppercase">伸び代・重点開発資産</span>
+</div>
+<h5 id="grow-category-title" class="font-bold text-slate-900 text-sm mb-1.5"></h5>
+<p id="grow-text" class="text-xs sm:text-sm text-slate-700 leading-relaxed flex-grow">
+分析中...
+</p>
+</div>
+</div>
+
+<!-- 4. First Step Action -->
+<div class="bg-white rounded-xl p-5 border-2 border-brand-teal/20 shadow-xs">
+<span class="text-xs font-bold text-slate-500 tracking-wide block mb-2">
+<i class="fa-solid fa-shoe-prints text-brand-orange mr-1"></i> 最初の一歩（今すぐ始められる具体アクション）
+</span>
+<div class="flex items-start gap-3 mt-1 bg-slate-50 p-4 rounded-lg border border-slate-200/60">
+<div class="bg-brand-orange text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-black shrink-0 mt-0.5">
+GO
+</div>
+<div>
+<p id="action-text" class="text-sm font-bold text-slate-800 leading-snug">
+分析中...
+</p>
+<p id="action-subtext" class="text-xs text-slate-600 mt-1 leading-relaxed">
+小さく始めることで、リスクなく社外での手応えを確かめることができます。
+</p>
+</div>
+</div>
+</div>
+
+<!-- 5. Re-test and Print toolbar -->
+<div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+<button id="btn-retest" type="button" onclick="startDiagnostics()" class="text-xs font-semibold text-slate-500 hover:text-brand-teal transition-colors py-2 px-3 rounded-lg hover:bg-slate-100 flex items-center gap-1.5 cursor-pointer">
+<i class="fa-solid fa-rotate-left"></i> もう一度最初から診断する
+</button>
+<button type="button" onclick="window.print()" class="text-xs font-semibold text-slate-500 hover:text-brand-teal transition-colors py-2 px-3 rounded-lg hover:bg-slate-100 flex items-center gap-1.5 cursor-pointer">
+<i class="fa-solid fa-print"></i> 結果を保存・印刷する
+</button>
+</div>
+
+<!-- 6. Next Step Promotion Banner -->
+<div id="cta-banner" class="bg-gradient-to-br from-brand-navy to-slate-900 text-white p-6 sm:p-7 rounded-2xl border-t-4 border-brand-orange shadow-lg space-y-4">
+<div class="space-y-2">
+<span class="bg-brand-orange text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded tracking-widest uppercase inline-block">
+Next Stage: サラ卒プログラム
+</span>
+<h4 class="text-lg sm:text-xl font-bold">あなたに経験がないのではありません。</h4>
+<p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+会社の外で「価値」として伝わる形に、まだ整理されていないだけです。<br class="hidden sm:inline">
+無料オンライン説明会では、組織の看板に依存せず、あなたの強みを社外で喜ばれる形に変えるロードマップをお伝えします。
+</p>
+</div>
+<div>
+<a href="https://example.com/briefing" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex bg-brand-orange hover:bg-brand-orangeHover text-white font-bold text-sm px-6 py-3.5 rounded-xl transition-all items-center justify-center gap-2 shadow-md hover:shadow-lg cursor-pointer">
+<span>無料説明会の詳細・日程を見る</span>
+<i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+</a>
+</div>
+</div>
+
+</div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-slate-900 text-slate-500 text-center py-6 text-xs border-t border-slate-800">
+<div class="max-w-4xl mx-auto px-4 space-y-1">
+<p>© 2026 キャリア自律支援プロジェクト. All Rights Reserved.</p>
+<p class="text-[10px] text-slate-600">本診断は個人の社外適応資産を棚卸し・可視化するための自己分析ツールです。</p>
+</div>
+</footer>
+
+<!-- ================= JAVASCRIPT LOGIC ================= -->
+<script>
+// --- QUIZ DATA CONFIGURATION (6 categories, 3 questions each = 18 questions) ---
+const quizData = [
+// 1. 経験資産
+{ id: 1, catIdx: 0, catName: "経験資産", q: "これまでの仕事で、後輩や同僚から業務のやり方や判断について個別相談されることが多い。" },
+{ id: 2, catIdx: 0, catName: "経験資産", q: "困難な業務トラブルや前例のない課題を、自分なりの工夫や交渉で切り抜けたエピソードがある。" },
+{ id: 3, catIdx: 0, catName: "経験資産", q: "単なる個人プレーだけでなく、メンバーの育成やチームの業務改善に関わり結果を出した経験がある。" },
+// 2. 専門性資産
+{ id: 4, catIdx: 1, catName: "専門性資産", q: "「この分野や業務手法のことなら自分に聞いてほしい」と胸を張れる得意領域がある。" },
+{ id: 5, catIdx: 1, catName: "専門性資産", q: "自分が培ってきた知識やノウハウは、他社や別業界に行っても本質的に通用する手応えがある。" },
+{ id: 6, catIdx: 1, catName: "専門性資産", q: "自分の業務のコツや強みを、初心者が実践できるようにステップバイステップで教えられる。" },
+// 3. 言語化資産
+{ id: 7, catIdx: 2, catName: "言語化資産", q: "自分がこれまで組織にどんな価値をもたらし、何の課題を解決してきたのか簡潔に説明できる。" },
+{ id: 8, catIdx: 2, catName: "言語化資産", q: "社内用語や業界専門用語を使わずに、自分の仕事を未経験の人にも分かりやすく説明できる。" },
+{ id: 9, catIdx: 2, catName: "言語化資産", q: "自分のスキルや提供できる提供価値を、職務経歴書やプロフィールとして書き出すことができる。" },
+// 4. 信頼資産
+{ id: 10, catIdx: 3, catName: "信頼資産", q: "現職の利害関係を離れても、個人的に近況報告や相談ができる仕事仲間・社外の知人がいる。" },
+{ id: 11, catIdx: 3, catName: "信頼資産", q: "社外の人や過去の同僚から「困っているので知恵を貸してほしい」と声をかけられたことがある。" },
+{ id: 12, catIdx: 3, catName: "信頼資産", q: "日頃から周囲への感謝や配慮を意識しており、紹介やご縁が継続する関係を築けている。" },
+// 5. 商品化資産
+{ id: 13, catIdx: 4, catName: "商品化資産", q: "自分の知識や経験が「誰のどんな悩み（痛み）を解消できるか」具体的にイメージできる。" },
+{ id: 14, catIdx: 4, catName: "商品化資産", q: "自分のノウハウを『1回60分の相談』や『研修・勉強会』などの具体的なパッケージにするアイデアがある。" },
+{ id: 15, catIdx: 4, catName: "商品化資産", q: "世の中でどのような個人支援サービスや有料セミナーが求められているか、リサーチしたことがある。" },
+// 6. 行動準備資産
+{ id: 16, catIdx: 5, catName: "行動準備資産", q: "自分の将来や新しい学びのために、平日夜や週末に週3時間以上の時間を確保できている。" },
+{ id: 17, catIdx: 5, catName: "行動準備資産", q: "会社の看板を外し、個人名で小さくとも新しい発信や活動を始めてみたいという意欲がある。" },
+{ id: 18, catIdx: 5, catName: "行動準備資産", q: "失敗を恐れず、お金をかけずに小さく試行錯誤（テスト実践）してみるフットワークの軽さがある。" }
+];
+
+const categoryNames = ["経験資産", "専門性資産", "言語化資産", "信頼資産", "商品化資産", "行動準備資産"];
+
+// Category Detail Definitions for Dynamic Feedback
+const categoryDetails = {
+0: {
+name: "経験資産（泥臭い実践知とトラブル対応力）",
+strengthComment: "現場でリアルに蓄積された実務経験やトラブル解決の引き出しが最大の武器です。教科書やAIには書かれていない『生きた判断力』は、後進や他社にとって極めて高い価値があります。",
+growComment: "社内では長年やってきた経験も、社外から見ると『どんな場面で頼れるのか』がまだ見えにくい状態です。過去の苦労話を『解決のメソッド』として整理する棚卸しが必要です。",
+action: "過去5年で最もプレッシャーが大きかった仕事と、それをどう工夫して乗り越えたかをA4用紙1枚に書き出してみましょう。"
+},
+1: {
+name: "専門性資産（横展開できるコアスキル）",
+strengthComment: "他部署や他社へ移っても再現できる明確な専門ノウハウをお持ちです。独自の仕事の型（フレームワーク）が確立されているため、社外でも即戦力として期待されやすい状態です。",
+growComment: "社内固有のルールや社内事情に依存したスキルになっていないか精査が必要です。他社や未経験者でも真似できる『普遍的なノウハウ』への抽象化に取り組みましょう。",
+action: "自分の得意業務を、新入社員や別部署の初心者が1人で実践できる『3ステップの手順書』にまとめてみましょう。"
+},
+2: {
+name: "言語化資産（価値を伝える翻訳力）",
+strengthComment: "自分のスキルや提供価値を客観的な言葉で伝える言語化力に秀でています。専門用語に逃げず分かりやすく説明できるため、社外との共感やマッチングを最速で生み出せます。",
+growComment: "素晴らしい経験を持ちながら、社内用語や肩書きで語ってしまい、社外の人に凄さが伝わりにくい状態です。『相手の悩み軸』で自分の仕事を語る練習をしましょう。",
+action: "家族や中学生に向けて、専門用語を一切使わずに『自分が仕事で誰をどう助けているか』を1分で説明してみましょう。"
+},
+3: {
+name: "信頼資産（社外とのつながり・関係構築力）",
+strengthComment: "利害関係を超えた人脈や、社外からも自然と相談が寄せられる人望をお持ちです。会社の看板を外してもあなた個人を指名してくれるファンが存在することが最大の強みです。",
+growComment: "社内の人間関係にエネルギーが集中しており、社外との接点がまだ限定的です。まずは過去にお世話になった知人や社外の勉強会など、外の世界へ緩やかな接点を広げましょう。",
+action: "最近連絡を取っていなかった社外の知人や昔の同僚3名に、『近況を共有するメッセージ』を気軽に送ってみましょう。"
+},
+4: {
+name: "商品化資産（ニーズに合わせたパッケージング力）",
+strengthComment: "「誰のどんな痛みを解決できるか」というビジネス視点をすでに持っています。自分の経験をセミナーや個別相談などのメニューとして組み立てられる高い応用力があります。",
+growComment: "スキルは十分にありますが、「お金を払ってでも解決したい相手の悩み」への紐付けがまだ手探りです。誰が困っているのか、ターゲットの解像度を高めましょう。",
+action: "ココナラやストアカなどのスキルシェアサイトで、自分の職種に近い人が『どんな名目で相談に乗っているか』を3件リサーチしてみましょう。"
+},
+5: {
+name: "行動準備資産（時間確保と自立行動力）",
+strengthComment: "会社の外へ向けた学習意欲とフットワークの軽さがあり、実際に行動時間を確保できています。小さく試して改善するアジャイルな姿勢が、早期の社外デビューを後押しします。",
+growComment: "日々の業務に追われ、社外活動や将来の準備のためのまとまった時間が取れていない可能性があります。まずは週1回、30分の『自分作戦会議』の枠を天引きしましょう。",
+action: "今週末のスケジュール帳に『会社の外に向けた自己投資の時間』として、あらかじめ60分の枠をブロックして確保しましょう。"
+}
+};
+
+let currentIdx = 0;
+let answers = []; // Stores user answers [1~5]
+let chartObj = null;
+
+// Start button trigger
+function startDiagnostics() {
+document.getElementById('start-screen').classList.add('hidden');
+document.getElementById('result-screen').classList.add('hidden');
+document.getElementById('quiz-screen').classList.remove('hidden');
+currentIdx = 0;
+answers = new Array(quizData.length).fill(null);
+renderQuestion();
+window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Render current question
+function renderQuestion() {
+const qObj = quizData[currentIdx];
+
+// Progress text and bar
+document.getElementById('progress-text').innerText = 設問 ${currentIdx + 1} / ${quizData.length};
+document.getElementById('category-badge').innerText = qObj.catName;
+
+const progressPct = ((currentIdx + 1) / quizData.length) * 100;
+document.getElementById('progress-bar').style.width = ${progressPct}%;
+
+// Question text
+document.getElementById('question-number').innerText = Question ${String(currentIdx + 1).padStart(2, '0')};
+document.getElementById('question-text').innerText = qObj.q;
+
+// Highlight previously selected answer if exists
+const buttons = document.querySelectorAll('#options-container .option-btn');
+buttons.forEach(btn => {
+const val = parseInt(btn.getAttribute('data-val'), 10);
+const icon = btn.querySelector('.check-icon');
+if (answers[currentIdx] === val) {
+btn.classList.add('border-brand-teal', 'bg-teal-50/70', 'text-brand-teal');
+btn.classList.remove('border-slate-200', 'bg-white', 'text-slate-700');
+icon.classList.remove('fa-regular', 'fa-circle', 'text-slate-300');
+icon.classList.add('fa-solid', 'fa-circle-check', 'text-brand-teal');
+} else {
+btn.classList.remove('border-brand-teal', 'bg-teal-50/70', 'text-brand-teal');
+btn.classList.add('border-slate-200', 'bg-white', 'text-slate-700');
+icon.classList.add('fa-regular', 'fa-circle', 'text-slate-300');
+icon.classList.remove('fa-solid', 'fa-circle-check', 'text-brand-teal');
+}
+});
+
+// Back button handling
+const backBtn = document.getElementById('back-btn');
+if (currentIdx === 0) {
+backBtn.style.visibility = "hidden";
+} else {
+backBtn.style.visibility = "visible";
+}
+}
+
+// Handle answer selection
+function selectAnswer(score) {
+answers[currentIdx] = score;
+
+// Immediate UI feedback
+const buttons = document.querySelectorAll('#options-container .option-btn');
+buttons.forEach(btn => {
+const val = parseInt(btn.getAttribute('data-val'), 10);
+const icon = btn.querySelector('.check-icon');
+if (val === score) {
+btn.classList.add('border-brand-teal', 'bg-teal-50/70', 'text-brand-teal');
+btn.classList.remove('border-slate-200', 'bg-white', 'text-slate-700');
+icon.classList.remove('fa-regular', 'fa-circle', 'text-slate-300');
+icon.classList.add('fa-solid', 'fa-circle-check', 'text-brand-teal');
+} else {
+btn.classList.remove('border-brand-teal', 'bg-teal-50/70', 'text-brand-teal');
+btn.classList.add('border-slate-200', 'bg-white', 'text-slate-700');
+icon.classList.add('fa-regular', 'fa-circle', 'text-slate-300');
+icon.classList.remove('fa-solid', 'fa-circle-check', 'text-brand-teal');
+}
+});
+
+// Advance to next question or analyze
+setTimeout(() => {
+if (currentIdx < quizData.length - 1) {
+currentIdx++;
+renderQuestion();
+} else {
+runFakeAnalysis();
+}
+}, 140);
+}
+
+// Navigate Back
+function goBack() {
+if (currentIdx > 0) {
+currentIdx--;
+renderQuestion();
+}
+}
+
+// Step-by-step Fake analysis animations
+function runFakeAnalysis() {
+document.getElementById('quiz-screen').classList.add('hidden');
+document.getElementById('analysis-screen').classList.remove('hidden');
+
+const steps = [
+{ id: 'step-1', delay: 0 },
+{ id: 'step-2', delay: 600 },
+{ id: 'step-3', delay: 1200 },
+{ id: 'step-4', delay: 1800 }
+];
+
+steps.forEach(step => {
+setTimeout(() => {
+const el = document.getElementById(step.id);
+if (el) {
+el.classList.remove('text-slate-300', 'text-slate-400');
+el.classList.add('text-brand-teal', 'font-semibold');
+el.innerHTML = <i class="fa-solid fa-circle-check text-brand-teal"></i> <span>${el.innerText.replace(/^[0-9]\.\s*/, '')}</span>;
+}
+}, step.delay);
+});
+
+setTimeout(() => {
+processResults();
+}, 2500);
+}
+
+// Main Calculation and UI Generation
+function processResults() {
+document.getElementById('analysis-screen').classList.add('hidden');
+document.getElementById('result-screen').classList.remove('hidden');
+
+// Calculate score per category (6 categories, 3 questions each, raw score 3~15)
+let catTotals = [0, 0, 0, 0, 0, 0];
+quizData.forEach((q, idx) => {
+catTotals[q.catIdx] += (answers[idx] || 3);
+});
+
+// Convert to 100-scale percentage per category
+const catPercentages = catTotals.map(val => Math.round((val / 15) * 100));
+
+// Total Score Calculation (18 questions * 5 max = 90 points raw)
+// Normalized to standard 100-point index
+const totalScoreRaw = answers.reduce((sum, val) => sum + (val || 0), 0);
+const totalScoreNorm = Math.round((totalScoreRaw / (quizData.length * 5)) * 100);
+
+// Update Total Score UI
+document.getElementById('total-score').innerText = totalScoreNorm;
+document.getElementById('raw-score-sub').innerText = 設問得点合計: ${totalScoreRaw} / 90点;
+document.getElementById('score-bar').style.width = ${totalScoreNorm}%;
+
+// Identify highest (Strength) and lowest (Grow Area) categories
+let maxCatIdx = 0;
+let minCatIdx = 0;
+let maxVal = -1;
+let minVal = 999;
+
+catPercentages.forEach((val, idx) => {
+if (val > maxVal) {
+maxVal = val;
+maxCatIdx = idx;
+}
+if (val < minVal) {
+minVal = val;
+minCatIdx = idx;
+}
+});
+
+// If by chance top and bottom are identical, make bottom distinct
+if (minCatIdx === maxCatIdx) {
+minCatIdx = (maxCatIdx + 1) % categoryNames.length;
+}
+
+// Determine Stage
+let stageTitle = "";
+let stageDesc = "";
+
+if (totalScoreNorm >= 80) {
+stageTitle = <span class="text-emerald-600"><i class="fa-solid fa-flag-checkered mr-1"></i> ステージ4：社外価値実践期</span>;
+stageDesc = "あなたのキャリア資産は、会社の外でも即戦力として通用するレベルに達しています。今必要なのはさらなる資格取得や勉強ではなく、持っている知見を商品化して社外へ提供する「最初の一歩」です。";
+} else if (totalScoreNorm >= 65) {
+stageTitle = <span class="text-teal-700"><i class="fa-solid fa-rocket mr-1"></i> ステージ3：社外価値翻訳期</span>;
+stageDesc = "実務経験は十分に蓄積されています。現在の課題は社内固有のノウハウを、社外の人にも価値が伝わる言葉へ「翻訳（言語化）」し、誰の悩みを解決できるかパッケージに整えることです。";
+} else if (totalScoreNorm >= 45) {
+stageTitle = <span class="text-amber-700"><i class="fa-solid fa-compass mr-1"></i> ステージ2：キャリア棚卸し期</span>;
+stageDesc = "長年真面目に積み上げてきた実績があるものの、「自分の強み」として整理されていない手前の状態です。過去のトラブル解決や他者への貢献プロセスを棚卸しすることから始めましょう。";
+} else {
+stageTitle = <span class="text-slate-700"><i class="fa-solid fa-seedling mr-1"></i> ステージ1：社外意識の芽生え期</span>;
+stageDesc = "現在は会社内での役割に最適化されている状態です。会社の看板を外したとき、自分は何を提供できるかという「個人視点」のアンテナを立てる絶好のタイミングです。";
+}
+
+document.getElementById('stage-title').innerHTML = stageTitle;
+document.getElementById('stage-desc').innerText = stageDesc;
+
+// Inject Dynamic Strengths & Areas to Grow
+const topDetail = categoryDetails[maxCatIdx];
+const bottomDetail = categoryDetails[minCatIdx];
+
+document.getElementById('strength-category-title').innerText = ${topDetail.name}（${catPercentages[maxCatIdx]}点）;
+document.getElementById('strength-text').innerText = topDetail.strengthComment;
+
+document.getElementById('grow-category-title').innerText = ${bottomDetail.name}（${catPercentages[minCatIdx]}点）;
+document.getElementById('grow-text').innerText = bottomDetail.growComment;
+
+// First action is focused on the growth area
+document.getElementById('action-text').innerText = bottomDetail.action;
+
+// Breakdown list below radar chart
+const listContainer = document.getElementById('chart-scores-list');
+listContainer.innerHTML = '';
+categoryNames.forEach((name, i) => {
+const item = document.createElement('div');
+item.className = "flex justify-between items-center bg-white p-2 rounded-lg border border-slate-200/70";
+item.innerHTML = <span class="text-slate-600 font-medium">${name}</span> <span class="font-extrabold ${i === maxCatIdx ? 'text-brand-teal' : (i === minCatIdx ? 'text-brand-orange' : 'text-slate-800')}">${catPercentages[i]}点</span>;
+listContainer.appendChild(item);
+});
+
+// Render Radar Chart
+renderChart(catPercentages);
+
+// Scroll smoothly to top of results
+window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Radar chart renderer
+function renderChart(scores) {
+const ctx = document.getElementById('assetChart').getContext('2d');
+
+if (chartObj) {
+chartObj.destroy();
+}
+
+chartObj = new Chart(ctx, {
+type: 'radar',
+data: {
+labels: categoryNames,
+datasets: [{
+label: 'キャリア資産スコア',
+data: scores,
+backgroundColor: 'rgba(15, 118, 110, 0.22)',
+borderColor: '#0f766e',
+borderWidth: 2.5,
+pointBackgroundColor: '#0f766e',
+pointBorderColor: '#ffffff',
+pointHoverBackgroundColor: '#ffffff',
+pointHoverBorderColor: '#0f766e',
+pointRadius: 4.5,
+pointHoverRadius: 6
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+scales: {
+r: {
+angleLines: { display: true, color: '#e2e8f0' },
+grid: { color: '#e2e8f0' },
+suggestedMin: 0,
+suggestedMax: 100,
+ticks: {
+stepSize: 25,
+backdropColor: 'transparent',
+color: '#94a3b8',
+font: { size: 9, weight: '500' }
+},
+pointLabels: {
+font: { family: 'Noto Sans JP', size: 11, weight: '700' },
+color: '#1e293b'
+}
+}
+},
+plugins: {
+legend: { display: false },
+tooltip: {
+callbacks: {
+label: function(context) {
+return  ${context.label}: ${context.raw}点 / 100点;
+}
+}
+}
+}
+}
+});
+}
+</script>
+</body>
+</html>
