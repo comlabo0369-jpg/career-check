@@ -93,9 +93,9 @@ border: none !important;
 <!-- Main Container -->
 <main class="flex-grow max-w-2xl w-full mx-auto px-4 py-6 md:py-10 flex items-center justify-center">
 
-<!-- ================= 1. START SCREEN ================= -->
+<!-- ================= 1. START SCREEN (WITH LEAD FORM) ================= -->
 <section id="start-screen" class="bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100 p-6 md:p-10 w-full fade-in">
-<div class="text-center mb-8">
+<div class="text-center mb-6">
 <span class="inline-flex items-center gap-1.5 bg-teal-50 text-brand-teal text-xs font-bold px-3.5 py-1.5 rounded-full border border-teal-200/60 mb-3">
 <i class="fa-solid fa-compass text-[11px]"></i> 40代・50代からのキャリアシフト支援
 </span>
@@ -106,46 +106,85 @@ border: none !important;
 </h2>
 </div>
 
-<div class="bg-slate-50 rounded-xl p-6 mb-8 border border-slate-200/80 text-slate-600 space-y-3.5 text-sm md:text-base leading-relaxed">
-<p class="font-bold text-slate-800 text-center text-base">
+<div class="bg-slate-50 rounded-xl p-5 mb-6 border border-slate-200/80 text-slate-600 space-y-3 text-sm md:text-base leading-relaxed">
+<p class="font-bold text-slate-800 text-center text-sm md:text-base">
 これまで積み上げてきた業務経験の中に、<br class="hidden sm:inline">
 会社の外でも求められる「6つのキャリア資産」が眠っています。
 </p>
-<div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-2 text-xs text-slate-600">
-<div class="bg-white p-2.5 rounded-lg border border-slate-200 text-center font-semibold">
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-1 text-xs text-slate-600">
+<div class="bg-white p-2 rounded-lg border border-slate-200 text-center font-semibold">
 <i class="fa-solid fa-layer-group text-brand-teal mr-1"></i> 経験資産
 </div>
-<div class="bg-white p-2.5 rounded-lg border border-slate-200 text-center font-semibold">
+<div class="bg-white p-2 rounded-lg border border-slate-200 text-center font-semibold">
 <i class="fa-solid fa-award text-brand-teal mr-1"></i> 専門性資産
 </div>
-<div class="bg-white p-2.5 rounded-lg border border-slate-200 text-center font-semibold">
+<div class="bg-white p-2 rounded-lg border border-slate-200 text-center font-semibold">
 <i class="fa-solid fa-comment-dots text-brand-teal mr-1"></i> 言語化資産
 </div>
-<div class="bg-white p-2.5 rounded-lg border border-slate-200 text-center font-semibold">
+<div class="bg-white p-2 rounded-lg border border-slate-200 text-center font-semibold">
 <i class="fa-solid fa-handshake text-brand-teal mr-1"></i> 信頼資産
 </div>
-<div class="bg-white p-2.5 rounded-lg border border-slate-200 text-center font-semibold">
+<div class="bg-white p-2 rounded-lg border border-slate-200 text-center font-semibold">
 <i class="fa-solid fa-box-open text-brand-teal mr-1"></i> 商品化資産
 </div>
-<div class="bg-white p-2.5 rounded-lg border border-slate-200 text-center font-semibold">
+<div class="bg-white p-2 rounded-lg border border-slate-200 text-center font-semibold">
 <i class="fa-solid fa-person-walking text-brand-teal mr-1"></i> 行動準備資産
 </div>
 </div>
-<p class="text-xs text-slate-500 text-center pt-2">
-直感に従って18の質問に答えるだけで、現在地と「最初の一歩」を可視化します。
-</p>
 </div>
 
-<div class="space-y-4">
-<button type="button" onclick="startDiagnostics()" class="w-full bg-brand-teal hover:bg-brand-tealHover text-white font-bold text-lg py-4 rounded-xl shadow-lg shadow-teal-900/10 hover:shadow-xl transition-all flex items-center justify-center gap-2 group cursor-pointer">
-<span>無料で診断を開始する</span>
+<!-- Lead Capture Form -->
+<form id="lead-form" onsubmit="handleFormSubmit(event)" class="space-y-4 mb-6 bg-slate-50/70 p-5 rounded-xl border border-slate-200/90">
+<div class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+<i class="fa-solid fa-user-pen text-brand-teal"></i>
+<span>診断を受ける方の情報をご入力ください</span>
+</div>
+
+<!-- Name Field -->
+<div>
+<label for="user-name" class="block text-xs font-bold text-slate-700 mb-1">
+お名前 <span class="text-red-500 font-semibold">*</span>
+<span class="text-[11px] text-slate-400 font-normal ml-1">（ニックネーム可）</span>
+</label>
+<input 
+type="text" 
+id="user-name" 
+required 
+placeholder="例：山田 太郎" 
+class="w-full px-3.5 py-2.5 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent bg-white transition-all"
+>
+</div>
+
+<!-- Email Field -->
+<div>
+<label for="user-email" class="block text-xs font-bold text-slate-700 mb-1">
+メールアドレス <span class="text-red-500 font-semibold">*</span>
+<span class="text-[11px] text-slate-400 font-normal ml-1">（診断結果の控え送信用）</span>
+</label>
+<input 
+type="email" 
+id="user-email" 
+required 
+placeholder="例：yamada@example.com" 
+class="w-full px-3.5 py-2.5 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent bg-white transition-all"
+>
+</div>
+
+<!-- Error Message box -->
+<div id="form-error" class="hidden text-xs text-red-600 bg-red-50 border border-red-200 p-2.5 rounded-lg flex items-center gap-1.5">
+<i class="fa-solid fa-circle-exclamation shrink-0"></i>
+<span id="form-error-text">入力内容をご確認ください。</span>
+</div>
+
+<!-- Submit Button -->
+<button type="submit" class="w-full bg-brand-teal hover:bg-brand-tealHover text-white font-bold text-base md:text-lg py-3.5 rounded-xl shadow-lg shadow-teal-900/10 hover:shadow-xl transition-all flex items-center justify-center gap-2 group cursor-pointer mt-2">
+<span>診断を開始する</span>
 <i class="fa-solid fa-arrow-right text-sm transition-transform group-hover:translate-x-1"></i>
 </button>
-<div class="flex items-center justify-center gap-4 text-xs text-slate-400">
-<span><i class="fa-solid fa-lock text-[10px] mr-1"></i>個人情報の登録不要</span>
-<span>•</span>
-<span><i class="fa-solid fa-check-double text-[10px] mr-1"></i>その場で即時結果表示</span>
-</div>
+</form>
+
+<div class="flex items-center justify-center gap-4 text-xs text-slate-400 text-center">
+<span><i class="fa-solid fa-shield-halved text-[11px] mr-1 text-slate-400"></i>ご入力いただいた情報は診断目的以外には利用いたしません</span>
 </div>
 </section>
 
@@ -212,7 +251,7 @@ border: none !important;
 <div class="w-16 h-16 border-4 border-slate-100 border-t-brand-teal rounded-full animate-spin"></div>
 
 <div class="space-y-1.5">
-<h3 class="text-lg font-bold text-slate-900">あなたのキャリア資産を多角分析しています</h3>
+<h3 class="text-lg font-bold text-slate-900"><span id="analyzing-user-name"></span>様のキャリア資産を分析しています</h3>
 <p class="text-xs text-slate-400">回答データから社外通用度と強み・課題を算出中…</p>
 </div>
 
@@ -246,7 +285,7 @@ border: none !important;
 <div class="inline-flex items-center gap-1.5 text-xs bg-brand-teal text-white font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2">
 <i class="fa-solid fa-chart-pie text-[11px]"></i> 診断結果レポート
 </div>
-<h2 class="text-xl md:text-2xl font-bold">あなたの「社外キャリア資産」現在地</h2>
+<h2 class="text-xl md:text-2xl font-bold"><span id="result-user-name"></span> 様の「社外キャリア資産」現在地</h2>
 <p class="text-xs text-slate-300 mt-1">会社の看板を外した個人としての市場適応力</p>
 </div>
 
@@ -467,11 +506,58 @@ action: "今週末のスケジュール帳に『会社の外に向けた自己�
 }
 };
 
+// User info state
+let currentUser = {
+name: '',
+email: ''
+};
+
 let currentIdx = 0;
 let answers = []; // Stores user answers [1~5]
 let chartObj = null;
 
-// Start button trigger
+// Form submission & start
+function handleFormSubmit(e) {
+e.preventDefault();
+const nameInput = document.getElementById('user-name');
+const emailInput = document.getElementById('user-email');
+const errorBox = document.getElementById('form-error');
+const errorText = document.getElementById('form-error-text');
+
+const name = nameInput.value.trim();
+const email = emailInput.value.trim();
+
+if (!name) {
+errorBox.classList.remove('hidden');
+errorText.innerText = 'お名前を入力してください。';
+nameInput.focus();
+return;
+}
+
+// Simple email validation regex
+const emailPattern = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
+if (!email || !emailPattern.test(email)) {
+errorBox.classList.remove('hidden');
+errorText.innerText = '有効なメールアドレスを入力してください。';
+emailInput.focus();
+return;
+}
+
+errorBox.classList.add('hidden');
+currentUser.name = name;
+currentUser.email = email;
+
+// Optional: Save to localStorage for convenience
+try {
+localStorage.setItem('career_diag_user', JSON.stringify(currentUser));
+} catch (err) {
+// Ignore storage errors in private browsing
+}
+
+startDiagnostics();
+}
+
+// Start Diagnostics
 function startDiagnostics() {
 document.getElementById('start-screen').classList.add('hidden');
 document.getElementById('result-screen').classList.add('hidden');
@@ -570,6 +656,12 @@ function runFakeAnalysis() {
 document.getElementById('quiz-screen').classList.add('hidden');
 document.getElementById('analysis-screen').classList.remove('hidden');
 
+// Reflect user name
+const analyzingName = document.getElementById('analyzing-user-name');
+if (analyzingName) {
+analyzingName.innerText = currentUser.name ? ${currentUser.name}  : '';
+}
+
 const steps = [
 { id: 'step-1', delay: 0 },
 { id: 'step-2', delay: 600 },
@@ -597,6 +689,9 @@ processResults();
 function processResults() {
 document.getElementById('analysis-screen').classList.add('hidden');
 document.getElementById('result-screen').classList.remove('hidden');
+
+// Reflect user name in header
+document.getElementById('result-user-name').innerText = currentUser.name || '受診者';
 
 // Calculate score per category (6 categories, 3 questions each, raw score 3~15)
 let catTotals = [0, 0, 0, 0, 0, 0];
@@ -634,7 +729,7 @@ minCatIdx = idx;
 }
 });
 
-// If by chance top and bottom are identical, make bottom distinct
+// If identical, offset
 if (minCatIdx === maxCatIdx) {
 minCatIdx = (maxCatIdx + 1) % categoryNames.length;
 }
@@ -686,8 +781,32 @@ listContainer.appendChild(item);
 // Render Radar Chart
 renderChart(catPercentages);
 
+// Optional: Send data to Google Sheets or Webhook if configured
+sendDiagnosisData({
+user: currentUser,
+totalScore: totalScoreNorm,
+rawScore: totalScoreRaw,
+stage: stageTitle.replace(/<[^>]*>?/gm, ''),
+categoryScores: catPercentages,
+topAsset: categoryNames[maxCatIdx],
+growAsset: categoryNames[minCatIdx]
+});
+
 // Scroll smoothly to top of results
 window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Webhook hook (For Google Apps Script or Zapier integration)
+function sendDiagnosisData(payload) {
+console.log("Diagnosis Completed for:", payload.user);
+// 将来GoogleスプレッドシートやLINE連携等のWebhook URLがある場合はここにfetchを記述可能
+/*
+fetch('YOUR_WEBHOOK_URL', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify(payload)
+}).catch(e => console.error(e));
+*/
 }
 
 // Radar chart renderer
